@@ -171,9 +171,7 @@
     let reconnectPollId = null;
 
     function sameInfo(a, b) {
-      return a.usbVendorId   === b.usbVendorId &&
-             a.usbProductId  === b.usbProductId &&
-             (a.serialNumber || '') === (b.serialNumber || '');
+      return a.usbVendorId   === b.usbVendorId;
     }
 
     navigator.serial.addEventListener('disconnect', e => {
@@ -284,7 +282,7 @@
         .getElementById('btn-connect')
         .onclick = async () => {
           try {
-            const port = await navigator.serial.requestPort({ filters });
+            const port = await navigator.serial.requestPort();
             if (port) await connect(port);
           } catch {}
         };
